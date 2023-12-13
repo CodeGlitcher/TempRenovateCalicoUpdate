@@ -1,0 +1,6 @@
+  - template: unused.yml
+    parameters:
+      sourceRepository: "https://projectcalico.docs.tigera.io/charts"
+      chart: "tigera-operator"
+      version: "3.26.1"
+      destinationRepository: "helm-projectcalico"
