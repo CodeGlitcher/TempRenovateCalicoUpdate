@@ -1,11 +1,30 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
-    "local>helmUpdates"
+    "config:base"
   ],
   "enabledManagers": [
       "regex"
+  ],
+  "regexManagers":  [
+    {
+        "fileMatch": ["sync-helm-charts.yml"],
+        "matchStrings": [
+            "sourceRepository:\\s+\"?https?:\/\/(?<registryHost>[a-zA-z0-9\\.\\-]+(\\:[0-9]+)*)(?<registryPath>\/[a-zA-Z0-9\\-]*)?\"?\\s+chart:\\s+\"?(?<depName>[a-z0-9.\\-_\\/]+)\"?\\s+version:\\s+\"?(?<currentValue>[a-z0-9.\\-_\\/]+)\"?"
+        ],
+        "versioningTemplate": "helm",
+        "datasourceTemplate": "helm",
+        "registryUrlTemplate": "https://{{ registryHost }}{{registryPath}}"
+    },
+    {
+        "fileMatch": ["sync-helm-charts.yml"],
+        "matchStrings": [
+            "sourceRepository:\\s+\"?oci:\/\/(?<registryHost>[a-zA-z0-9\\.\\-]+(\\:[0-9]+)*)(?<registryPath>\/[a-zA-Z0-9\\-]*)?\"?\\s+chart:\\s+\"?(?<depName>[a-z0-9.\\-_\\/]+)\"?\\s+version:\\s+\"?(?<currentValue>[a-z0-9.\\-_\\/]+)\"?"
+        ],
+        "versioningTemplate": "helm",
+        "datasourceTemplate": "docker",
+        "registryUrlTemplate": "https://{{ registryHost }}{{registryPath}}"
+    }
   ],
   "fetchReleaseNotes": "off",
   "minimumReleaseAge": "3 days"
