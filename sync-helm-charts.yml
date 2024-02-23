@@ -2,5 +2,5 @@
     parameters:
       sourceRepository: "https://projectcalico.docs.tigera.io/charts"
       chart: "tigera-operator"
-      version: "3.26.1"
+      version: "v3.27.2"
       destinationRepository: "helm-projectcalico"
